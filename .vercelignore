@@ -1,0 +1,10 @@
+# Archivos que nunca se suben en un despliegue con Vercel CLI
+.env
+.env.*
+!.env.example
+node_modules
+.next
+.vercel
+AGENTS.md
+CLAUDE.md
+*.log
