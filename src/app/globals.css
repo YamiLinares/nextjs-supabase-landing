@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Paleta: azul profundo (principal), arena y blanco cálido (fondos),
+   verde natural (acento). */
+@theme {
+  --color-ocean-950: #061a2e;
+  --color-ocean-900: #0b2e4f;
+  --color-ocean-800: #113d66;
+  --color-ocean-700: #17507f;
+  --color-ocean-600: #1f6399;
+  --color-ocean-100: #e3edf6;
+
+  --color-sand-50: #fdfaf4;
+  --color-sand-100: #f7f0e3;
+  --color-sand-200: #ede1cb;
+  --color-sand-300: #dfccab;
+
+  --color-leaf-50: #ecf6ef;
+  --color-leaf-600: #2e7a4d;
+  --color-leaf-700: #23633d;
+
+  --color-ink: #1c2633;
+  --color-ink-muted: #4a5666;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-face), ui-serif, Georgia, serif;
+
+  --shadow-card: 0 1px 2px rgb(11 46 79 / 0.06), 0 8px 24px -12px rgb(11 46 79 / 0.18);
+  --shadow-card-hover: 0 2px 4px rgb(11 46 79 / 0.08), 0 18px 36px -16px rgb(11 46 79 / 0.32);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-sand-50);
+  color: var(--color-ink);
+}
+
+/* Foco visible y consistente para navegación con teclado */
+:focus-visible {
+  outline: 3px solid var(--color-leaf-600);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
