@@ -1,0 +1,27 @@
+# Configuración de build para AWS Amplify Hosting (Next.js con SSR).
+# Amplify usa este archivo en lugar de la configuración que genera automáticamente.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Next.js 16 requiere Node.js 20.9 o superior. Si la imagen de build trae
+        # nvm, se usa Node.js 22 (LTS); si no, se usa la versión de la imagen.
+        - if command -v nvm > /dev/null 2>&1; then nvm install 22 && nvm use 22; fi
+        - node --version
+        - npm ci --no-audit --no-fund
+    build:
+      commands:
+        # Los Server Components no ven las variables de entorno de Amplify salvo que
+        # se escriban en .env.production durante el build (documentación de Amplify).
+        # Solo se copian las NEXT_PUBLIC_*, que son valores públicos por diseño.
+        - env | grep -e NEXT_PUBLIC_ >> .env.production || true
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - node_modules/**/*
